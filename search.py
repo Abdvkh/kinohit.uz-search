@@ -51,9 +51,8 @@ def get_films(scraped_page, details, description_length=120):
                         for rating in result.find_all('div',
                                                         class_='text-rate')]
             extra = 'Quality' if type != 'serials' else 'Last episode'
-            quality_or_episode = get_stripped_text(
-                data.parent.parent.select('div.kachestvo_short_story')[0]
-            )
+            extra_value = data.parent.parent.select('div.kachestvo_short_story')
+            quality_or_episode = get_stripped_text(extra_value[0]) if len(extra_value) != 0 else '-'
 
             msg = f"\nName: {name}"\
                 + f"\nDescription: {descr}..."\
